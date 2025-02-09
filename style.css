@@ -2,11 +2,21 @@ body {
   background-color: black;
   color: aliceblue;
   overflow-x: hidden;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: "Anonymous Pro", serif;
   font-weight: 400;
   font-style: normal;
+  padding: 10px;
 }
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
 .navbar {
   height: 30px;
 }
@@ -178,4 +188,125 @@ h1 span:nth-child(19) {
 .navbar,
 form {
   font-size: 1.5rem;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: "<percentage>";
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: true;
+}
+:root {
+  --d: 2500ms;
+  --angle: 90deg;
+  --gradX: 100%;
+  --gradY: 50%;
+  --c1: rgba(168, 239, 255, 1);
+  --c2: rgba(168, 239, 255, 0.1);
+}
+
+.wrapper {
+  min-width: min(40rem, 100%);
+}
+
+.edu {
+  border: 0.35rem solid;
+  padding: 10px;
+  border-image: conic-gradient(
+      from var(--angle),
+      var(--c2),
+      var(--c1) 0.1turn,
+      var(--c1) 0.15turn,
+      var(--c2) 0.25turn
+    )
+    30;
+  animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.edu:nth-child(2) {
+  border-image: radial-gradient(
+      ellipse at var(--gradX) var(--gradY),
+      var(--c1),
+      var(--c1) 10%,
+      var(--c2) 40%
+    )
+    30;
+  animation: borderRadial var(--d) linear infinite forwards;
+}
+
+@keyframes borderRotate {
+  100% {
+    --angle: 420deg;
+  }
+}
+
+@keyframes borderRadial {
+  20% {
+    --gradX: 100%;
+    --gradY: 50%;
+  }
+  40% {
+    --gradX: 100%;
+    --gradY: 100%;
+  }
+  60% {
+    --gradX: 50%;
+    --gradY: 100%;
+  }
+  80% {
+    --gradX: 0%;
+    --gradY: 50%;
+  }
+  100% {
+    --gradX: 50%;
+    --gradY: 0%;
+  }
+}
+
+.pj {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: all 0.5s ease;
+  padding: 10px;
+  margin: 5px;
+}
+
+.pj::before {
+  background: linear-gradient(
+    0deg,
+    transparent,
+    transparent 30%,
+    rgba(0, 255, 255, 0.3)
+  );
+  transform: rotate(-45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.pj:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.pj:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+.pi:hover {
+  height: 310px;
+  width: 267px;
 }
